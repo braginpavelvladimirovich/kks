@@ -1,0 +1,40 @@
+Брагин П.В.
+Изучение протокола ARP. Часть 1
+Цель работы: Изучить особенности функционирования ARP-протокола в локальной сети с коммутаторами
+№ соб.	отправитель	получатель	тип пакета	arp pc0	arp mp3	mac switch0
+1	-	pc0	icmp	-	-	-
+2	-	pc0	arp	-	-	-
+3	pc0	switch0	arp	-	
+
+
+4	switch0	pc3,pc2,pc1	arp	-	
+
+
+5	pc3	switch0	arp	-	
+
+
+6	switch0	pc0	arp	
+
+
+7	-	pc0	arp	
+
+
+8	pc0	switch0	arp	
+
+
+
+9	switch0	pc3,pc2,pc1	arp	
+
+
+
+10	pc3	switch0	arp	
+
+
+11	switch0	pc0	arp	
+
+
+
+
+Вывод:
+
+
