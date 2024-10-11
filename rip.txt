@@ -168,3 +168,85 @@ L       192.168.10.254/32 is directly connected, GigabitEthernet0/1
 
 summary: after lock on rip ver 2 make possible use net mask
 
+
+varinant BRAGIN
+     10.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C       10.0.0.0/8 is directly connected, GigabitEthernet0/2/0
+L       10.0.0.2/32 is directly connected, GigabitEthernet0/2/0
+R    11.0.0.0/8 [120/1] via 10.0.0.1, 00:00:15, GigabitEthernet0/2/0
+                [120/1] via 12.0.0.1, 00:00:01, GigabitEthernet0/1/0
+     12.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C       12.0.0.0/8 is directly connected, GigabitEthernet0/1/0
+L       12.0.0.2/32 is directly connected, GigabitEthernet0/1/0
+     13.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C       13.0.0.0/8 is directly connected, Serial0/0/0
+L       13.0.0.1/32 is directly connected, Serial0/0/0
+R    14.0.0.0/8 [120/1] via 12.0.0.1, 00:00:01, GigabitEthernet0/1/0
+R    192.168.1.0/24 [120/1] via 10.0.0.1, 00:00:15, GigabitEthernet0/2/0
+R    192.168.2.0/24 [120/1] via 12.0.0.1, 00:00:01, GigabitEthernet0/1/0
+     192.168.3.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.3.0/24 is directly connected, GigabitEthernet0/0
+L       192.168.3.254/32 is directly connected, GigabitEthernet0/0
+     192.168.10.0/24 is variably subnetted, 3 subnets, 2 masks
+R       192.168.10.0/24 is possibly down, routing via 12.0.0.1, GigabitEthernet0/1/0
+R       192.168.10.0/25 [120/1] via 10.0.0.1, 00:00:15, GigabitEthernet0/2/0
+R       192.168.10.128/25 [120/1] via 12.0.0.1, 00:00:01, GigabitEthernet0/1/0
+     192.168.81.0/24 is variably subnetted, 2 subnets, 2 masks
+R       192.168.81.0/26 [120/1] via 13.0.0.2, 00:00:06, Serial0/0/0
+R       192.168.81.64/27 [120/1] via 13.0.0.2, 00:00:06, Serial0/0/0
+
+r2:
+R    10.0.0.0/8 [120/1] via 11.0.0.1, 00:00:00, GigabitEthernet0/1/0
+                [120/1] via 12.0.0.2, 00:00:06, GigabitEthernet0/2/0
+     11.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C       11.0.0.0/8 is directly connected, GigabitEthernet0/1/0
+L       11.0.0.2/32 is directly connected, GigabitEthernet0/1/0
+     12.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C       12.0.0.0/8 is directly connected, GigabitEthernet0/2/0
+L       12.0.0.1/32 is directly connected, GigabitEthernet0/2/0
+R    13.0.0.0/8 [120/1] via 12.0.0.2, 00:00:06, GigabitEthernet0/2/0
+     14.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C       14.0.0.0/8 is directly connected, Serial0/0/1
+L       14.0.0.1/32 is directly connected, Serial0/0/1
+R    192.168.1.0/24 [120/1] via 11.0.0.1, 00:00:00, GigabitEthernet0/1/0
+     192.168.2.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.2.0/24 is directly connected, GigabitEthernet0/0
+L       192.168.2.254/32 is directly connected, GigabitEthernet0/0
+R    192.168.3.0/24 [120/1] via 12.0.0.2, 00:00:06, GigabitEthernet0/2/0
+     192.168.10.0/24 is variably subnetted, 3 subnets, 2 masks
+R       192.168.10.0/25 [120/1] via 11.0.0.1, 00:00:00, GigabitEthernet0/1/0
+C       192.168.10.128/25 is directly connected, GigabitEthernet0/1
+L       192.168.10.254/32 is directly connected, GigabitEthernet0/1
+     192.168.81.0/24 is variably subnetted, 2 subnets, 2 masks
+R       192.168.81.0/26 [120/2] via 12.0.0.2, 00:00:06, GigabitEthernet0/2/0
+R       192.168.81.64/27 [120/2] via 12.0.0.2, 00:00:06, GigabitEthernet0/2/0
+
+my router:
+R    10.0.0.0/8 [120/1] via 13.0.0.1, 00:00:17, Serial0/0/0
+R    11.0.0.0/8 [120/2] via 13.0.0.1, 00:00:17, Serial0/0/0
+R    12.0.0.0/8 [120/1] via 13.0.0.1, 00:00:17, Serial0/0/0
+     13.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C       13.0.0.0/8 is directly connected, Serial0/0/0
+L       13.0.0.2/32 is directly connected, Serial0/0/0
+     14.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C       14.0.0.0/8 is directly connected, Serial0/0/1
+L       14.0.0.2/32 is directly connected, Serial0/0/1
+R    192.168.1.0/24 [120/2] via 13.0.0.1, 00:00:17, Serial0/0/0
+R    192.168.2.0/24 [120/2] via 13.0.0.1, 00:00:17, Serial0/0/0
+R    192.168.3.0/24 [120/1] via 13.0.0.1, 00:00:17, Serial0/0/0
+     192.168.10.0/24 is variably subnetted, 3 subnets, 2 masks
+R       192.168.10.0/24 is possibly down, routing via 13.0.0.1, Serial0/0/0
+R       192.168.10.0/25 [120/2] via 13.0.0.1, 00:00:17, Serial0/0/0
+R       192.168.10.128/25 [120/2] via 13.0.0.1, 00:00:17, Serial0/0/0
+     192.168.81.0/24 is variably subnetted, 4 subnets, 3 masks
+C       192.168.81.0/26 is directly connected, GigabitEthernet0/0
+L       192.168.81.62/32 is directly connected, GigabitEthernet0/0
+C       192.168.81.64/27 is directly connected, GigabitEthernet0/1
+L       192.168.81.94/32 is directly connected, GigabitEthernet0/1
+
+
+
+
+
+
+
