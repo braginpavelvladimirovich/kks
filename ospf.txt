@@ -1,0 +1,510 @@
+algorithm route with status line OSPF
+setting routers
+1. ip adressing interface loopback
+en
+conf t
+int loopback 0
+ip adress 192.168.100.1 255.255.255.255
+en
+conf t
+int loopback 0
+ip adress 192.168.100.2 255.255.255.255
+en
+conf t
+int loopback 0
+ip adress 192.168.100.3 255.255.255.255
+en
+conf t
+int loopback 0
+ip adress 192.168.100.4 255.255.255.255
+en
+conf t
+int loopback 0
+ip adress 192.168.100.5 255.255.255.255
+2. process OSPF set on
+exit
+router ospf 1
+3. add network
+exit
+router ospf 1
+network 192.168.3.0 0.0.0.255 area 0
+network 192.168.4.0 0.0.0.3 area 0
+network 13.0.0.0 0.255.255.255 area 0
+network 12.0.0.0 0.255.255.255 area 0
+network 10.0.0.0 0.255.255.255 area 0
+exit
+router ospf 1
+network 192.168.4.0 0.0.0.3 area 0
+exit
+router ospf 1
+network 192.168.81.0 0.0.0.63 area 0
+network 192.168.81.0 0.0.0.31 area 0
+network 13.0.0.0 0.255.255.255 area 0
+network 14.0.0.0 0.255.255.255 area 0
+network 192.168.4.0 0.0.0.3 area 0
+exit
+router ospf 1
+network 192.168.2.0 0.0.0.255 area 0
+network 192.168.10.0 0.0.0.127 area 0
+network 192.168.4.0 0.0.0.3 area 0
+network 14.0.0.0 0.255.255.255 area 0
+network 11.0.0.0 0.255.255.255 area 0
+network 12.0.0.0 0.255.255.255 area 0
+exit
+router ospf 1
+network 192.168.1.0 0.0.0.255 area 0
+network 192.168.10.0 0.0.0.127 area 0
+network 11.0.0.0 0.255.255.255 area 0
+network 10.0.0.0 0.255.255.255 area 0
+Router#show run
+Building configuration...
+
+Current configuration : 1376 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2911/K9 sn FTX15241C0D-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 192.168.100.1 255.255.255.255
+!
+interface GigabitEthernet0/0
+ ip address 192.168.3.254 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/0/0
+ ip address 13.0.0.1 255.0.0.0
+!
+interface Serial0/0/1
+ ip address 192.168.4.1 255.255.255.252
+!
+interface GigabitEthernet0/1/0
+ ip address 12.0.0.2 255.0.0.0
+!
+interface GigabitEthernet0/2/0
+ ip address 10.0.0.2 255.0.0.0
+!
+interface Serial0/3/0
+ no ip address
+ clock rate 2000000
+!
+interface Serial0/3/1
+ no ip address
+ clock rate 2000000
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ log-adjacency-changes
+ network 192.168.3.0 0.0.0.255 area 0
+ network 192.168.4.0 0.0.0.3 area 0
+ network 13.0.0.0 0.255.255.255 area 0
+ network 12.0.0.0 0.255.255.255 area 0
+ network 10.0.0.0 0.255.255.255 area 0
+!
+router rip
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+======================
+Press RETURN to get started.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Router>en
+Router#show run
+Building configuration...
+
+Current configuration : 1648 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2911/K9 sn FTX15241014-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 192.168.100.2 255.255.255.255
+!
+interface GigabitEthernet0/0
+ ip address 192.168.2.254 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 192.168.10.254 255.255.255.128
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/0/0
+ ip address 192.168.4.10 255.255.255.252
+!
+interface Serial0/0/1
+ ip address 14.0.0.1 255.0.0.0
+ clock rate 2000000
+!
+interface GigabitEthernet0/1/0
+ ip address 11.0.0.2 255.0.0.0
+!
+interface GigabitEthernet0/2/0
+ ip address 12.0.0.1 255.0.0.0
+!
+interface FastEthernet0/3/0
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/3/1
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/3/2
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/3/3
+ switchport mode access
+ switchport nonegotiate
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ log-adjacency-changes
+ network 192.168.2.0 0.0.0.255 area 0
+ network 192.168.10.0 0.0.0.127 area 0
+ network 192.168.4.0 0.0.0.3 area 0
+ network 14.0.0.0 0.255.255.255 area 0
+ network 11.0.0.0 0.255.255.255 area 0
+ network 12.0.0.0 0.255.255.255 area 0
+!
+router rip
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+=======================================================
+Press RETURN to get started.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Router>en
+Router#show run
+Building configuration...
+
+Current configuration : 1648 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2911/K9 sn FTX15241014-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 192.168.100.2 255.255.255.255
+!
+interface GigabitEthernet0/0
+ ip address 192.168.2.254 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 192.168.10.254 255.255.255.128
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/0/0
+ ip address 192.168.4.10 255.255.255.252
+!
+interface Serial0/0/1
+ ip address 14.0.0.1 255.0.0.0
+ clock rate 2000000
+!
+interface GigabitEthernet0/1/0
+ ip address 11.0.0.2 255.0.0.0
+!
+interface GigabitEthernet0/2/0
+ ip address 12.0.0.1 255.0.0.0
+!
+interface FastEthernet0/3/0
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/3/1
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/3/2
+ switchport mode access
+ switchport nonegotiate
+!
+interface FastEthernet0/3/3
+ switchport mode access
+ switchport nonegotiate
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ log-adjacency-changes
+ network 192.168.2.0 0.0.0.255 area 0
+ network 192.168.10.0 0.0.0.127 area 0
+ network 192.168.4.0 0.0.0.3 area 0
+ network 14.0.0.0 0.255.255.255 area 0
+ network 11.0.0.0 0.255.255.255 area 0
+ network 12.0.0.0 0.255.255.255 area 0
+!
+router rip
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+==============================================
+Router(config-router)#do show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+O    10.0.0.0/8 [110/65] via 13.0.0.1, 00:54:17, Serial0/0/0
+O    11.0.0.0/8 [110/65] via 14.0.0.1, 01:50:04, Serial0/0/1
+O    12.0.0.0/8 [110/65] via 13.0.0.1, 01:51:14, Serial0/0/0
+                [110/65] via 14.0.0.1, 01:51:14, Serial0/0/1
+     13.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C       13.0.0.0/8 is directly connected, Serial0/0/0
+L       13.0.0.2/32 is directly connected, Serial0/0/0
+     14.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+C       14.0.0.0/8 is directly connected, Serial0/0/1
+L       14.0.0.2/32 is directly connected, Serial0/0/1
+O    192.168.1.0/24 [110/66] via 13.0.0.1, 00:54:17, Serial0/0/0
+                    [110/66] via 14.0.0.1, 00:54:17, Serial0/0/1
+O    192.168.2.0/24 [110/65] via 14.0.0.1, 01:51:14, Serial0/0/1
+O    192.168.3.0/24 [110/65] via 13.0.0.1, 01:52:55, Serial0/0/0
+     192.168.4.0/24 is variably subnetted, 3 subnets, 2 masks
+O       192.168.4.0/30 [110/128] via 13.0.0.1, 01:52:55, Serial0/0/0
+C       192.168.4.4/30 is directly connected, Serial0/1/0
+L       192.168.4.6/32 is directly connected, Serial0/1/0
+     192.168.10.0/25 is subnetted, 1 subnets
+O       192.168.10.0/25 [110/66] via 13.0.0.1, 00:54:17, Serial0/0/0
+                        [110/66] via 14.0.0.1, 00:54:17, Serial0/0/1
+     192.168.81.0/24 is variably subnetted, 4 subnets, 3 masks
+C       192.168.81.0/26 is directly connected, GigabitEthernet0/0
+L       192.168.81.62/32 is directly connected, GigabitEthernet0/0
+C       192.168.81.64/27 is directly connected, GigabitEthernet0/1
+L       192.168.81.94/32 is directly connected, GigabitEthernet0/1
+     192.168.100.0/32 is subnetted, 1 subnets
+C       192.168.100.4/32 is directly connected, Loopback0
+     192.168.102.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.102.0/24 is directly connected, GigabitEthernet0/2.102
+L       192.168.102.254/32 is directly connected, GigabitEthernet0/2.102
+     192.168.108.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.108.0/24 is directly connected, GigabitEthernet0/2.108
+L       192.168.108.254/32 is directly connected, GigabitEthernet0/2.108
+table route router4 after network added 2 new network
+
