@@ -1,0 +1,39 @@
+settin NAT
+1. declare nat on interfaces:
+interface GigabitEthernet0/0
+ ip address 205.205.205.2 255.255.255.252
+ ip nat outside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 192.168.3.9 255.255.255.252
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ ip address 192.168.3.5 255.255.255.252
+ ip nat inside
+ duplex auto
+ speed auto
+
+2. create accses-list standard ACL:
+ip access-list standard fn
+ permit 192.168.1.0 0.0.0.127
+ permit 192.168.1.128 0.0.0.31
+ permit 192.168.2.0 0.0.0.63
+ permit 192.168.2.64 0.0.0.15
+
+3. set ACL to outsid interface and setting on translation:
+ip nat inside source list fn interface GigabitEthernet0/0 overload
+
+4. setting deafult route
+ ip route 0.0.0.0 0.0.0.0 205.205.205.1  
+
+5. for ospf settin route
+router ospf 1
+ log-adjacency-changes
+ network 192.168.3.0 0.0.0.3 area 0
+ network 192.168.3.4 0.0.0.3 area 0
+ default-information originate
