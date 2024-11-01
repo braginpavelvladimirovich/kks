@@ -37,3 +37,151 @@ router ospf 1
  network 192.168.3.0 0.0.0.3 area 0
  network 192.168.3.4 0.0.0.3 area 0
  default-information originate
+
+
+my configuration
+Router#show run
+Building configuration...
+
+Current configuration : 1974 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+ip dhcp pool vlan4
+ network 192.168.2.0 255.255.255.192
+ default-router 192.168.2.62
+ip dhcp pool vlan5
+ network 192.168.2.64 255.255.255.240
+ default-router 192.168.2.78
+ip dhcp pool vlan10
+ network 192.168.10.0 255.255.255.0
+ default-router 192.168.10.254
+ip dhcp pool vlan45
+ network 192.168.45.0 255.255.255.0
+ default-router 192.168.45.254
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2911/K9 sn FTX152445A8-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 192.168.100.2 255.255.255.255
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0.4
+ encapsulation dot1Q 4
+ ip address 192.168.2.62 255.255.255.192
+!
+interface GigabitEthernet0/0.5
+ encapsulation dot1Q 5
+ ip address 192.168.2.78 255.255.255.240
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.254 255.255.255.0
+!
+interface GigabitEthernet0/1.45
+ encapsulation dot1Q 45
+ ip address 192.168.45.254 255.255.255.0
+!
+interface GigabitEthernet0/2
+ ip address 192.168.3.6 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/1/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/2/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/3/0
+ no ip address
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ log-adjacency-changes
+ network 192.168.2.0 0.0.0.63 area 0
+ network 192.168.2.64 0.0.0.15 area 0
+ network 192.168.3.4 0.0.0.3 area 0
+ network 192.168.10.0 0.0.0.255 area 0
+ network 192.168.45.0 0.0.0.255 area 0
+!
+router rip
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+no cdp run
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+
+
+Router#
